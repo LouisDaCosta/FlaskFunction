@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__)
 
-@app.route("/rabbit", method=['POST'])
+@app.route("/rabbit", methods=['POST'])
 def create():
   nom = request.form["nom"]
   connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
@@ -18,7 +18,7 @@ def create():
   res["message"] = "File OK"
   return json.dumps(res)
  
-@app.route("/rabbit/<nom>", method=['POST'])
+@app.route("/rabbit/<nom>", methods=['POST'])
 def send(nom=None):
   message = request.form["message"]
   connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
@@ -31,7 +31,7 @@ def send(nom=None):
   res["message"] = "Message OK"
   return json.dumps(res)
   
-@app.route("/rabbit/<nom>", method=['GET'])
+@app.route("/rabbit/<nom>", methods=['GET'])
 def receive(nom=None):
   connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
   channel = connection.channel()
