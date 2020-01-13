@@ -47,7 +47,7 @@ def receive(nom=None):
   res = {}
   res["code"] = c
   res["message"] = m
-  res["body"] = body
+  res["body"] = body.decode("utf-8")
   return json.dumps(res)
   
 if __name__ == "__main__":
