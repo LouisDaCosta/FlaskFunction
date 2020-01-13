@@ -40,14 +40,17 @@ def receive(nom=None):
     channel.basic_ack(method_frame.delivery_tag)
     c = 200
     m = "OK"
+    body = body.decode("utf-8")
   else:
     c = 404
     m = "NOK"
+    body = ""
   
   res = {}
   res["code"] = c
   res["message"] = m
-  res["body"] = body.decode("utf-8")
+  res["body"] = body
+  
   return json.dumps(res)
   
 if __name__ == "__main__":
